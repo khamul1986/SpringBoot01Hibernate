@@ -3,6 +3,7 @@ package pl.khamul.SpringBoot01Hibernate.entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -19,7 +20,13 @@ public class Book {
 
     private int rating;
 
-    private String descrtiption;
+    private String description;
+
+    @ManyToOne
+    private Publisher publisher;
+
+    @ManyToMany
+    private List<Author> authors;
 
     public Long getId() {
         return id;
@@ -37,12 +44,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getDescrtiption() {
-        return descrtiption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrtiption(String author) {
-        this.descrtiption = author;
+    public void setDescription(String author) {
+        this.description = author;
     }
 
     public int getRating() {
@@ -61,6 +68,22 @@ public class Book {
         this.author = author;
     }
 
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -68,7 +91,8 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", rating=" + rating +
-                ", descrtiption='" + descrtiption + '\'' +
+                ", description='" + description + '\'' +
+                ", publisher=" + publisher +
                 '}';
     }
 }

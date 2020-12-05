@@ -23,8 +23,8 @@ public class AuthorController {
     @ResponseBody
     public String hello() {
         Author author = new Author();
-        author.setFirstName("Franek");
-        author.setLastName("Kimono");
+        author.setFirstName("Karate");
+        author.setLastName("Mistrz");
         authorDao.saveAuthor(author);
         return "Id dodanego autora:"
                 + author.getId();
