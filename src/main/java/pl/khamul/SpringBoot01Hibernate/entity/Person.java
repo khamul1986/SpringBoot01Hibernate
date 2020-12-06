@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "person")
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,7 +13,7 @@ public class Person {
     private String password;
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PersonDetails details;
 
 

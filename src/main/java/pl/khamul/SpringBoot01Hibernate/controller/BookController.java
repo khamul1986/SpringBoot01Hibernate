@@ -15,6 +15,8 @@ import pl.khamul.SpringBoot01Hibernate.entity.Publisher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookController {
@@ -35,7 +37,6 @@ public class BookController {
     public String hello() {
         Book book = new Book();
         book.setTitle("Thinking in Java");
-        book.setAuthor("Bruce Eckel");
         book.setDescription("abc");
         book.setRating(3);
 
@@ -83,5 +84,53 @@ public class BookController {
         Book book = bookDao.findById(id);
         bookDao.delete(book);
         return "deleted";
+    }
+
+    @GetMapping("/book/findall")
+    @ResponseBody
+    public String findall(){
+        List<Book> allBooks = bookDao.findall();
+        return allBooks.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br>"));
+    }
+
+    @GetMapping("/book/find/{rating}")
+    @ResponseBody
+    public String findByRating(@PathVariable int rating) {
+        List<Book> booksByRating = bookDao.findByRating(rating);
+        return booksByRating.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br>"));
+    }
+
+    @GetMapping("/book/find/publ")
+    @ResponseBody
+    public String findIfPubl(){
+        List<Book> list = bookDao.findPublish();
+        return  list.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br>"));
+    }
+
+
+
+    @GetMapping("/book/find/publ/{id}")
+    @ResponseBody
+    public String findByPubl(@PathVariable int id) {
+        Publisher publisher = publisherDao.findById(id);
+        List<Book> booksPubl = bookDao.findByPubl(publisher);
+        return booksPubl.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br>"));
+    }
+    @GetMapping("/book/find/auth/{id}")
+    @ResponseBody
+    public String findbyAuthor(@PathVariable int id){
+        Author author = authorDao.findById(id);
+        List<Book> booksAuth = bookDao.findByAuthor(author);
+        return booksAuth.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.joining("<br>"));
     }
 }

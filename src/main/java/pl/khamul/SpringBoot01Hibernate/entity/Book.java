@@ -16,8 +16,6 @@ public class Book {
 
     private String title;
 
-    private String author;
-
     private int rating;
 
     private String description;
@@ -60,13 +58,6 @@ public class Book {
         this.rating = rating;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public Publisher getPublisher() {
         return publisher;
@@ -89,7 +80,6 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
                 ", publisher=" + publisher +
